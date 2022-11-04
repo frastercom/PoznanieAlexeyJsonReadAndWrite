@@ -1,0 +1,147 @@
+http://testservermyhost.ddns.net:8080/api/message
+
+GET http://testservermyhost.ddns.net:8080/api/message?in_user=name&out_user=name1
+
+POST http://testservermyhost.ddns.net:8080/api/message
+{
+    "in_user" : "name",
+    "message" : "00xo00000",
+    "out_user" : "name1"
+}
+
+
+using System;
+using System.Net;
+using System.IO;
+using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            string s = "";
+            WebRequest request = WebRequest.Create("http://testservermyhost.ddns.net:8080/api/message?in_user=name&out_user=name1");
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    s = reader.ReadToEnd();
+                }
+            }
+            response.Close();
+
+
+            Message message = JsonSerializer.Deserialize<Message>(s);
+                Console.WriteLine(message.message);
+        }
+    }
+
+    class Message
+    {
+
+        [JsonPropertyName("id")]
+        public int id { get; set; }
+
+        [JsonPropertyName("in_name")]
+        public string in_name { get; set; }
+
+        [JsonPropertyName("message")]
+        public string message { get; set; }
+
+        [JsonPropertyName("out_name")]
+        public string out_name { get; set; }
+        public Message(int id, string in_name, string message, string out_name)
+        {
+            this.id = id;
+            this.in_name = in_name;
+            this.message = message;
+            this.out_name = out_name;
+        }
+    }
+}
+
+
+
+
+
+
+
+post
+
+
+
+
+using System;
+using System.Net;
+using System.IO;
+using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            WebRequest request = WebRequest.Create("http://testservermyhost.ddns.net:8080/api/message");
+            request.Method = "POST"; // для отправки используется метод Post
+                                     // данные для отправки
+
+            Message m = new Message("name", "message", "name1");
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            string data = JsonSerializer.Serialize<Message>(m, options);
+            // преобразуем данные в массив байтов
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
+            // устанавливаем тип содержимого - параметр ContentType
+            request.ContentType = "application/json";
+            // Устанавливаем заголовок Content-Length запроса - свойство ContentLength
+            request.ContentLength = byteArray.Length;
+
+            //записываем данные в поток запроса
+            using (Stream dataStream = request.GetRequestStream())
+            {
+                dataStream.Write(byteArray, 0, byteArray.Length);
+            }
+
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    Console.WriteLine(reader.ReadToEnd());
+                }
+            }
+            response.Close();
+            Console.WriteLine("Запрос выполнен...");
+        }
+    }
+
+    class Message
+    {
+        [JsonPropertyName("in_user")]
+        public string in_name { get; set; }
+
+        [JsonPropertyName("message")]
+        public string message { get; set; }
+
+        [JsonPropertyName("out_user")]
+        public string out_name { get; set; }
+        public Message( string in_name, string message, string out_name)
+        {
+            this.in_name = in_name;
+            this.message = message;
+            this.out_name = out_name;
+        }
+    }
+}
