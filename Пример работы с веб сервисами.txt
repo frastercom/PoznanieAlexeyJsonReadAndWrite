@@ -145,3 +145,10 @@ namespace ConsoleApp1
         }
     }
 }
+
+
+
+
+Задача: вывести погоду с сервиса yandex
+документация:
+https://yandex.ru/dev/weather/doc/dg/concepts/forecast-info.html
