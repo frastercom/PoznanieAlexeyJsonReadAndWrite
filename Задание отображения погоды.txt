@@ -1,0 +1,57 @@
+Задание клиентски отобразить погоду, в случае не работоспособности API (http://gitmyserver.ddns.net:8080/api/w) написать в телегу @frast23 или вк https://vk.com/id257941646
+Запрос
+GET http://gitmyserver.ddns.net:8080/api/w
+
+в поле data находиться массив, это нужно учесть
+Пример ответа:
+{
+    "count": 1,
+    "data": [
+        {
+            "app_temp": -0.6,
+            "aqi": 14,
+            "city_name": "Kirov",
+            "clouds": 83,
+            "country_code": "RU",
+            "datetime": "2022-11-13:14",
+            "dewpt": 3.1,
+            "dhi": 0,
+            "dni": 0,
+            "elev_angle": -12.11,
+            "ghi": 0,
+            "gust": 10.0078125,
+            "h_angle": -90,
+            "lat": 58.5966,
+            "lon": 49.6601,
+            "ob_time": "2022-11-13 14:10",
+            "pod": "n",
+            "precip": 0,
+            "pres": 975.5,
+            "rh": 97,
+            "slp": 992,
+            "snow": 0,
+            "solar_rad": 0,
+            "sources": [
+                "analysis"
+            ],
+            "state_code": "33",
+            "station": "UWKD",
+            "sunrise": "04:14",
+            "sunset": "12:39",
+            "temp": 3.5,
+            "timezone": "Europe/Kirov",
+            "ts": 1668348655,
+            "uv": 0,
+            "vis": 0,
+            "weather": {
+                "description": "Broken clouds",
+                "code": 803,
+                "icon": "c03n"
+            },
+            "wind_cdir": "NNW",
+            "wind_cdir_full": "north-northwest",
+            "wind_dir": 355,
+            "wind_spd": 4.6787534
+        }
+    ]
+}
