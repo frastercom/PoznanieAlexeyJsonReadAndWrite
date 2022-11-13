@@ -1,0 +1,54 @@
+Задание: написать программу работы с rest api
+1) программа должна добавлять цпу
+2) должна удалять
+3) должна выводить весь список
+
+Запросы:
+1) создание: POST http://gitmyserver.ddns.net:8080/api/cpu/create
+  пример запроса:
+  {
+    "name":"apple",
+    "model":"a1",
+    "ggz":"1",
+    "description":"Пробный ЦПУ"
+  }
+  пример ответа: 
+  {
+    "id": 1,
+    "name": "apple",
+    "model": "a1",
+    "ggz": "1",
+    "description": "Пробный ЦПУ"
+  }
+2) удаление: GET http://gitmyserver.ddns.net:8080/api/cpu/delete?id=1
+  http://gitmyserver.ddns.net:8080/api/cpu/delete?id={здесь необходимо отправить id cpu}
+  пример ответа если успешно: 
+  {
+    "status": "ok"
+  }
+
+3) получить весь список cpu: GET http://gitmyserver.ddns.net:8080/api/cpu
+Пример ответа: 
+[
+    {
+        "id": 3,
+        "name": "apple",
+        "model": "a2",
+        "ggz": "2",
+        "description": "Пробный ЦПУ 2"
+    },
+    {
+        "id": 2,
+        "name": "apple",
+        "model": "a1",
+        "ggz": "1",
+        "description": "Пробный ЦПУ"
+    }
+]
+
+описание объекта:
+id - идентификатор цпу (при создании отправлять не надо)
+name - наименование процессора
+model - модель
+ggz - частота
+description - описание
