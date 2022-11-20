@@ -55,3 +55,6 @@ GET http://gitmyserver.ddns.net:8080/api/w
         }
     ]
 }
+
+
+описание json брать отсюда https://www.weatherbit.io/api/weather-current
