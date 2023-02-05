@@ -1,6 +1,7 @@
 Задание клиентски отобразить погоду, в случае не работоспособности API (http://gitmyserver.ddns.net:8080/api/w) написать в телегу @frast23 или вк https://vk.com/id257941646
 Запрос
 GET http://gitmyserver.ddns.net:8080/api/w
+https://api.weatherbit.io/v2.0/current?lat=58.5966&lon=49.6601&key=8592d275b6c84076bf3e74ab686f26a2&include=minutely
 
 в поле data находиться массив, это нужно учесть
 Пример ответа:
